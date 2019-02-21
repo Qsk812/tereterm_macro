@@ -1,0 +1,69 @@
+;==============================================
+;; IP Addreess
+HOST=''
+;; Port (SSH:22)
+PORT='12121'
+;; Username
+USERNAME='swim_kenmo'
+;; keyfile
+KEY_FILE='key'
+;; ??????(??)
+INI_FILE='TERATERM.INI'
+;; prompt
+remote_prompt = '$'
+;==============================================
+
+;; ???????????????????????????
+;; ???????KEY_FILE_PATH?????????????????
+MACRO_DIR=''
+KEY_FILE_PATH=''
+;; ???????????????????
+getdir MACRO_DIR
+;; ?????????
+strconcat KEY_FILE_PATH MACRO_DIR
+strconcat KEY_FILE_PATH '\'
+strconcat KEY_FILE_PATH KEY_FILE
+
+;; ??????????(??)
+strconcat INI_FILE_PATH MACRO_DIR
+strconcat INI_FILE_PATH '\'
+strconcat INI_FILE_PATH INI_FILE
+
+;; ????????
+COMMAND = HOST
+strconcat COMMAND ':'
+strconcat COMMAND PORT
+strconcat COMMAND ' /ssh /2 /auth=publickey /user='
+strconcat COMMAND USERNAME
+strconcat COMMAND ' /keyfile='
+strconcat COMMAND KEY_FILE_PATH
+;; ??????????(??)
+;; strconcat COMMAND ' /F='
+;; strconcat COMMAND INI_FILE_PATH
+
+
+;; ??
+connect COMMAND
+
+
+;; input domain
+inputbox 'input a domain.' 'input'
+strsplit inputstr '.'
+FILE_NAME = groupmatchstr1
+RECV_PATH = MACRO_DIR
+strconcat RECV_PATH '\'
+strconcat RECV_PATH FILE_NAME
+
+;; run
+wait remote_prompt
+sendln 'python test.py'
+wait remote_prompt
+scprecv '/home/....' RECV_PATH
+mpause 1000
+sendln 'echo "press Enter" && read'
+wait remote_prompt
+
+sendln "exit"
+
+
+end
