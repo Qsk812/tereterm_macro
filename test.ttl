@@ -2,11 +2,11 @@
 ;; IP Addreess
 HOST=''
 ;; Port (SSH:22)
-PORT='12121'
+PORT=''
 ;; Username
-USERNAME='swim_kenmo'
+USERNAME=''
 ;; keyfile
-KEY_FILE='key'
+KEY_FILE=''
 ;; ??????(??)
 INI_FILE='TERATERM.INI'
 ;; prompt
